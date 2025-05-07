@@ -50,10 +50,6 @@ public class Main {
                     System.out.println("PageRank：" + graph.calPageRank(word));
                 }
                 case 6 -> System.out.println(graph.randomWalk());
-                case 7 -> {
-                    // 使用 GraphVisualization 统一方法调用
-                    SwingUtilities.invokeLater(() -> GraphVisualization.showGraph(graph));
-                }
                 case 0 -> {
                     System.out.println("退出程序");
                     return;
