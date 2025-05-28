@@ -1,10 +1,12 @@
+package graph;
+
 import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         Graph graph = new Graph();
-        graph.buildGraphFromFile("D:\\university\\软件工程\\lab1\\Easy Test.txt");
+        graph.buildGraphFromFile("D:\\university\\软件工程\\2022112314-Lab1-code\\Easy Test.txt");
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -50,6 +52,10 @@ public class Main {
                     System.out.println("PageRank：" + graph.calPageRank(word));
                 }
                 case 6 -> System.out.println(graph.randomWalk());
+                case 7 -> {
+                    // 使用 GraphVisualization 统一方法调用
+                    SwingUtilities.invokeLater(() -> GraphVisualization.showGraph(graph));
+                }
                 case 0 -> {
                     System.out.println("退出程序");
                     return;

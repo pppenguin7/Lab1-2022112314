@@ -1,4 +1,7 @@
-import java.io.*;
+package graph;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Graph {
@@ -24,6 +27,7 @@ public class Graph {
         }
     }
 
+
     public void showDirectedGraph() {
         System.out.println("Directed Graph:");
         for (String from : adjacencyList.keySet()) {
@@ -34,8 +38,9 @@ public class Graph {
     }
 
     public String queryBridgeWords(String word1, String word2) {
+        // 先判断word1和word2是否都在图中
         if (!adjacencyList.containsKey(word1) || !adjacencyList.containsKey(word2)) {
-            return "No treasure in the graph!";
+            return "No word1 or word2 in the graph!";
         }
 
         Set<String> bridgeWords = new HashSet<>();
@@ -48,11 +53,12 @@ public class Graph {
         }
 
         if (bridgeWords.isEmpty()) {
-            return "No treasure in the graph!";
+            return "No bridge words from " + word1 + " to " + word2 + "!";
         }
 
-        return "The bridge words from \"" + word1 + "\" to \"" + word2 + "\" are: " + String.join(", ", bridgeWords);
+        return "The bridge words from " + word1 + " to " + word2 + " are: " + String.join(", ", bridgeWords);
     }
+
 
     public String generateNewText(String inputText) {
         String[] words = inputText.toLowerCase().split("\\s+");
