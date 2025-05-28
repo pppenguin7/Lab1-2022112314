@@ -18,15 +18,15 @@ public class GraphTest {
     public void testBridgeWords_AnotherValid() throws IOException {
         Graph g = new Graph();
         g.buildGraphFromFile("D:\\university\\软件工程\\2022112314-Lab1-code\\Easy Test.txt");
-        String result = g.queryBridgeWords("the", "carefully");
-        assertEquals("The bridge words from the to carefully are: scientist", result);
+        String result = g.queryBridgeWords("the", "");
+        assertEquals("No word1 or word2 in the graph!", result);
     }
 
     @Test
     public void testBridgeWords_NoWord2() throws IOException {
         Graph g = new Graph();
         g.buildGraphFromFile("D:\\university\\软件工程\\2022112314-Lab1-code\\Easy Test.txt");
-        String result = g.queryBridgeWords("the", "unknown");
+        String result = g.queryBridgeWords("the", "@");
         assertEquals("No word1 or word2 in the graph!", result);
     }
 

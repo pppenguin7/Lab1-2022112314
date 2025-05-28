@@ -1,4 +1,5 @@
 package graph;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,6 +7,17 @@ import java.util.*;
 
 public class Graph {
     private final Map<String, Map<String, Integer>> adjacencyList = new HashMap<>();
+    private final Random rand;  // 将 Random 作为类成员变量
+
+    // 默认构造函数，使用系统时间种子
+    public Graph() {
+        this.rand = new Random();
+    }
+
+    // 可传入种子的构造函数，方便测试随机性
+    public Graph(long seed) {
+        this.rand = new Random(seed);
+    }
 
     public void buildGraphFromFile(String filePath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -27,7 +39,6 @@ public class Graph {
         }
     }
 
-
     public void showDirectedGraph() {
         System.out.println("Directed Graph:");
         for (String from : adjacencyList.keySet()) {
@@ -38,7 +49,6 @@ public class Graph {
     }
 
     public String queryBridgeWords(String word1, String word2) {
-        // 先判断word1和word2是否都在图中
         if (!adjacencyList.containsKey(word1) || !adjacencyList.containsKey(word2)) {
             return "No word1 or word2 in the graph!";
         }
@@ -59,11 +69,9 @@ public class Graph {
         return "The bridge words from " + word1 + " to " + word2 + " are: " + String.join(", ", bridgeWords);
     }
 
-
     public String generateNewText(String inputText) {
         String[] words = inputText.toLowerCase().split("\\s+");
         StringBuilder result = new StringBuilder();
-        Random rand = new Random();
 
         for (int i = 0; i < words.length - 1; i++) {
             result.append(words[i]).append(" ");
@@ -172,7 +180,6 @@ public class Graph {
 
     public String randomWalk() {
         List<String> path = new ArrayList<>();
-        Random rand = new Random();
         List<String> nodes = new ArrayList<>(adjacencyList.keySet());
         if (nodes.isEmpty()) return "Empty graph";
 
@@ -198,9 +205,6 @@ public class Graph {
         return adjacencyList;
     }
 
-    /**
-     * 获取图中所有节点（包含入边目标）
-     */
     public Set<String> getAllNodes() {
         Set<String> allNodes = new HashSet<>(adjacencyList.keySet());
         for (Map<String, Integer> edges : adjacencyList.values()) {
@@ -209,9 +213,6 @@ public class Graph {
         return allNodes;
     }
 
-    /**
-     * 获取图中节点数量
-     */
     public int getNodeCount() {
         return getAllNodes().size();
     }
